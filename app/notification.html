@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Notifications</title>
+    </head>
+    <body>
+        <button type="button" id="notify" name="button">Click here to trigger a notification!</button>
+        <script>
+            const notifier = require('node-notifier')
+            const path = require('path')
+            document.getElementById('notify').onclick = (event) => {
+                notifier.notify({
+                    title: 'My awesome title',
+                    message: 'Hello from eletron, Mr. Tungshooter!',
+                    icon: path.join('', '/Users/tungshooter/Downloads/laravel_logo.png'),
+                    sound: true, // Only notification center or windows toasters
+                    wait: true // Wait with callback, until user action is taken against
+                }, function(err, response) {
+                    // Response is response from notification
+                })
+
+                notifier.on('click', (notifierObject, options) => {
+                    console.log('Clicked on the notification')
+                })
+
+                notifier.on('timeout', (notifierObject, options) => {
+                    console.log('Notification timed out!')
+                })
+            }
+        </script>
+    </body>
+</html>
