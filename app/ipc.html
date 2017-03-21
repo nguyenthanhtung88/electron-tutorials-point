@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Hello World!</title>
+    </head>
+    <body>
+        <script>
+            const {ipcRenderer} = require('electron')
+
+            // Synchronous message emmiter and handler
+            console.log(ipcRenderer.sendSync('synchronous-message', 'sync ping'))
+
+            // Asynchronous message handler
+            ipcRenderer.on('asynchronous-reply', (event, arg) => {
+                console.log(arg)
+            })
+
+            // Asynchronous message sender
+            ipcRenderer.send('asynchronous-message', 'async ping')
+        </script>
+    </body>
+</html>
